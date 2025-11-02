@@ -31,7 +31,7 @@ namespace LabTextChat
             string Paths = Path.Combine(LabApi.Loader.Features.Paths.PathManager.LabApi.ToString(), "TextLog");
             if (!Directory.Exists(Paths)) { Directory.CreateDirectory(Paths); }
             LogPath = Path.Combine(Paths, $"{Today}.txt");
-            if (!File.Exists(LogPath)) { File.Create(LogPath); }
+            if (!File.Exists(LogPath)) { File.WriteAllText(LogPath, ""); }
             Logger.Debug($"==============");
             Logger.Debug($"打字插件已启动");
             Logger.Debug($"作者: 灰");
@@ -74,8 +74,8 @@ namespace LabTextChat
                 ev.Player.AddHint(hint);
             }
         }
-        public static string LogPath;
-        public static string Today = System.DateTime.Now.ToString("d");
-        public static string NowTime = System.DateTime.Now.ToString("F");
+        public static string LogPath { get; set; }
+        public static string Today => DateTime.Now.ToString("yyyy-MM-dd");
+        public static string NowTime => DateTime.Now.ToString("F");
     }
 }
